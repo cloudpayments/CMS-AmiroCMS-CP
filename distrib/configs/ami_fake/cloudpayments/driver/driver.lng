@@ -1,0 +1,119 @@
+%%driver_title%en%%
+CloudPayments
+%%driver_title%ru%%
+CloudPayments
+
+%%public_id%ru%%
+Идентификатор сайта
+%%public_id%en%%
+Public ID
+
+%%secret_key%ru%%
+Секретный ключ
+%%secret_key%en%%
+Secret key
+
+%%receipt%ru%%
+Онлайн-касса
+%%receipt%en%%
+Online receipt
+
+%%taxation_system%ru%%
+Система налогообложения
+%%taxation_system%en%%
+Taxation system
+
+%%vat%ru%%
+Ставка НДС
+%%vat%en%%
+Vat
+
+%%vat_delivery%ru%%
+Ставка НДС для доставки
+%%vat_delivery%en%%
+Vat for delivery
+
+%%taxation_system_0%ru%%
+Общая система налогообложения
+%%taxation_system_0%en%%
+General taxation system
+
+%%taxation_system_1%ru%%
+Упрощенная система налогообложения (Доход)
+%%taxation_system_1%en%%
+Simplified taxation system (Income)
+
+%%taxation_system_2%ru%%
+Упрощенная система налогообложения (Доход минус Расход)
+%%taxation_system_2%en%%
+Simplified taxation system (Income minus Expenditure)
+
+%%taxation_system_3%ru%%
+Единый налог на вмененный доход
+%%taxation_system_3%en%%
+A single tax on imputed income
+
+%%taxation_system_4%ru%%
+Единый сельскохозяйственный налог
+%%taxation_system_4%en%%
+Unified agricultural tax
+
+%%taxation_system_5%ru%%
+Патентная система налогообложения
+%%taxation_system_5%en%%
+Patent system of taxation
+
+%%vat_none%ru%%
+НДС не облагается
+%%vat_none%en%%
+No Vat
+
+%%vat_0%ru%%
+НДС 0%
+%%vat_0%en%%
+Vat 0%
+
+%%vat_10%ru%%
+НДС 10%
+%%vat_10%en%%
+Vat 10%
+
+%%vat_18%ru%%
+НДС 18%
+%%vat_18%en%%
+Vat 18%
+
+%%vat_110%ru%%
+Расчетный НДС 10/110
+%%vat_110%en%%
+Calculated vat 10/110
+
+%%vat_118%ru%%
+Расчетный НДС 18/118
+%%vat_118%en%%
+Calculated vat 18/118
+
+%%notify_urls%ru%%
+URL для настройки уведомлений в ЛК CloudPayments
+%%notify_urls%en%%
+URL for set notify in CloudPayments account
+
+%%url_check%ru%%
+Check
+%%url_check%en%%
+Check
+
+%%url_pay%ru%%
+Pay
+%%url_pay%en%%
+Pay
+
+%%url_fail%ru%%
+Fail
+%%url_fail%en%%
+Fail
+
+%%url_refund%ru%%
+Refund
+%%url_refund%en%%
+Refund

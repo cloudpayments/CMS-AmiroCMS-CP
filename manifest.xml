@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package id="cloudpayments.pay_drv_cloudpayments" version="1.0" manifestVersion="1.0">
+    <information lang="en">
+        <title>CloudPayments payment driver</title>
+        <description>Widget for payment</description>
+        <author>cloudpayments.ru</author>
+        <source>https://cloudpayments.ru</source>
+    </information>
+    <information lang="ru">
+        <title>Платежный драйвер CloudPayments</title>
+        <description>Модуль позволит с легкостью добавить на ваш сайт оплату банковскими картами через платежный сервис CloudPayments.</description>
+        <author>cloudpayments.ru</author>
+        <source>https://cloudpayments.ru</source>
+    </information>
+    <installation>
+        <install hypermodule="ami_fake" configuration="cloudpayments" version="1.0" />
+    </installation>
+    <dependencies>
+        <dependency hypermodule="ami_fake" version="1.0" />
+    </dependencies>
+</package>
