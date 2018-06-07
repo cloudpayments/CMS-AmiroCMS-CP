@@ -1,4 +1,4 @@
-# CloudPayments модуль для Wordpress - eCommerce
+# CloudPayments модуль для AmiroCMS
 Модуль позволит с легкостью добавить на ваш сайт оплату банковскими картами через платежный сервис [CloudPayments](https://cloudpayments.ru).
 
 
