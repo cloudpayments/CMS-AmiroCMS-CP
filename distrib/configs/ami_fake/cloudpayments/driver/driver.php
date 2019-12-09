@@ -5,6 +5,7 @@
  *
  * @package Driver_PaymentSystem
  */
+
 class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
     protected $driverName = 'cloudpayments';
 
@@ -43,15 +44,30 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
                      'button_name',
                      'button',
                      'secret_key',
-                     'public_id'
+                     'public_id',
+                     'skin',
+                     'cp_lang',
+                     'calculationPlace'
                  ) as $var
         ) {
             unset($aHiddenData[$var]);
         }
 
-        if ($aData['currency'] == 'RUR') {
-            $aData['currency'] = 'RUB';
+        if ($aData['currency'] == 'AZM') {
+            $aData['currency'] = 'AZN';
         }
+        elseif ($aData['currency'] == 'BGN') {
+            $aData['currency'] = 'BGL';
+        }
+        elseif ($aData['currency'] == 'BYR') {
+            $aData['currency'] = 'BYN';
+        }
+        elseif ($aData['currency'] == 'RUR') {
+            $aData['currency'] = 'RUR';
+        }
+        elseif ($aData['currency'] == 'TRL') {
+            $aData['currency'] = 'TRY';
+        };
 
         foreach ($aHiddenData as $key => $value) {
             $aData['hiddens'] .= "<input type=\"hidden\" name=\"$key\" value=\"$value\">\r\n";
@@ -79,7 +95,20 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
         $currency = $aData['currency'];
         if ('RUR' === $currency) {
             $currency = 'RUB';
+        };
+        if ('AZM' === $currency) {
+            $currency = 'AZN';
         }
+        elseif ('BGN' === $currency) {
+            $currency = 'BGL';
+        }
+        elseif ('BYR' === $currency) {
+            $currency = 'BYN';
+        }
+        elseif ('TRL' === $currency) {
+            $currency = 'TRY';
+        };
+        
         $widget_params = array(
             "publicId"    => $aData["public_id"],  //id из личного кабинета
             "description" => $aData["description"], //назначение
@@ -88,6 +117,7 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
             "invoiceId"   => $aData["order_id"], //номер заказа  (необязательно)
             "accountId"   => $aData["email"], //идентификатор плательщика (необязательно)
             "email"       => $aData["email"],
+            "skin"        => $aData["skin"], //дизайн виджета
             "data"        => array(
                 "name"          => $aData["firstname"],
                 "phone"         => $aData["contact"],
@@ -99,7 +129,8 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
             $widget_params['data']['cloudPayments']['customerReceipt'] = $this->getReceiptData($aData);
         }
         $aData['widget_params']   = json_encode($widget_params);
-        $aData['widget_language'] = $this->mapLanguage($aData['language']);
+        //$aData['widget_language'] = $this->mapLanguage($aData['language']);
+        $aData['widget_language'] = $aData["cp_lang"];
 
         return parent::getPayButtonParams($aData, $aRes);
     }
@@ -112,10 +143,11 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
      */
     private function getReceiptData($aData) {
         $receipt = array(
-            'Items'          => array(),
-            'taxationSystem' => $aData['taxation_system'],
-            'email'          => $aData['email'],
-            'phone'          => $aData['contact']
+            'Items'            => array(),
+            "calculationPlace" => $aData['calculationPlace'], //место осуществления расчёта
+            'taxationSystem'   => $aData['taxation_system'],
+            'email'            => $aData['email'],
+            'phone'            => $aData['contact']
         );
 
         $items             = array();
@@ -191,7 +223,7 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
      */
     public function payCallback(array $aGet, array $aPost, &$aRes, array $aCheckData, array $aOrderData) {
         $action = isset($aGet['cp_action']) ? $aGet['cp_action'] : '';
-        if (!in_array($action, array('check', 'pay', 'confirm', 'fail', 'refund', 'cancel'))) {
+        if (!in_array($action, array('check', 'pay', 'сonfirm', 'fail', 'refund', 'cancel'))) {
             $this->exitWithCallbackResponse(self::CLOUDPAYMENTS_RESULT_ERROR_NOT_ACCEPTED, 'Invalid action');
         }
 
@@ -204,7 +236,7 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
             $this->exitWithCallbackResponse(self::CLOUDPAYMENTS_RESULT_ERROR_NOT_ACCEPTED, 'Invalid sign');
         };
 
-        if (in_array($action, array('check', 'pay', 'confirm'))) {
+        if (in_array($action, array('check', 'pay'))) {
             $customData = unserialize($aOrderData[0]);
             $totalOrderAmount  = floatval($aOrderData['order_amount'] + $aOrderData['shipping']);
             $feePercent = floatval($customData['fee_percent']);
@@ -224,7 +256,7 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
         $status = '';
         switch ($action) {
             case 'pay':
-            case 'confirm':
+            case 'сonfirm':
                 if ($aPost['Status'] == 'Completed') {
                     $status = 'confirmed';
                 }
@@ -240,7 +272,7 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
 
         $this->processOrderCallback($orderId, $status);
         $this->exitWithCallbackResponse(self::CLOUDPAYMENTS_RESULT_SUCCESS);
-
+      
         return -1;
     }
 
@@ -248,15 +280,15 @@ class Cloudpayments_PaymentSystemDriver extends AMI_PaymentSystemDriver {
      * @param $value
      * @return mixed
      */
-    private function mapLanguage($value) {
-        $map = array(
-            'en' => 'en-US',
-            'ru' => 'ru-RU'
-        );
+ //   private function mapLanguage($value) {
+//        $map = array(
+   //         'en' => 'en-US',
+ //           'ru' => 'ru-RU'
+//        );
 
-        return isset($map[$value]) ? $map[$value] : $value;
-    }
-
+  //      return isset($map[$value]) ? $map[$value] : $value;
+ //   }
+//
     /**
      * @param $orderId
      * @param $status

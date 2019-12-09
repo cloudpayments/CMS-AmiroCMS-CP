@@ -13,6 +13,46 @@ Public ID
 %%secret_key%en%%
 Secret key
 
+%%payment_scheme%ru%%
+Схема проведения платежа
+%%payment_scheme%en%%
+Secret key
+
+%%sms%ru%%
+Одностадийная оплата
+%%sms%en%%
+Single message scheme
+
+%%dms%ru%%
+Двухстадийная оплата
+%%dms%en%%
+Dual message scheme
+
+%%skin%ru%%
+Дизайн виджета
+%%skin%en%%
+Widget design
+
+%%classic%ru%%
+Classic
+%%classic%en%%
+Classic
+
+%%modern%ru%%
+Modern
+%%modern%en%%
+Modern
+
+%%mini%ru%%
+Mini
+%%mini%en%%
+Mini
+
+%%cp_lang%ru%%
+Локализация виджета
+%%cp_lang%en%%
+Widget localization
+
 %%receipt%ru%%
 Онлайн-касса
 %%receipt%en%%
@@ -78,20 +118,20 @@ Vat 0%
 %%vat_10%en%%
 Vat 10%
 
-%%vat_18%ru%%
-НДС 18%
-%%vat_18%en%%
-Vat 18%
+%%vat_20%ru%%
+НДС 20%
+%%vat_20%en%%
+Vat 20%
 
 %%vat_110%ru%%
 Расчетный НДС 10/110
 %%vat_110%en%%
 Calculated vat 10/110
 
-%%vat_118%ru%%
-Расчетный НДС 18/118
-%%vat_118%en%%
-Calculated vat 18/118
+%%vat_120%ru%%
+Расчетный НДС 20/120
+%%vat_120%en%%
+Calculated vat 20/120
 
 %%notify_urls%ru%%
 URL для настройки уведомлений в ЛК CloudPayments
@@ -117,3 +157,13 @@ Fail
 Refund
 %%url_refund%en%%
 Refund
+
+%%url_сonfirm%ru%%
+Confirm
+%%url_сonfirm%en%%
+Confirm
+
+%%url_сancel%ru%%
+Cancel
+%%url_сancel%en%%
+Cancel
